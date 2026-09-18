@@ -31,6 +31,17 @@ A utilização de Inteligência Artificial no desenvolvimento deste projeto não
 > **Em resumo:** os dados são provenientes de fontes de terceiros, a aplicação foi desenvolvida para uso próprio e contou com forte auxílio do ChatGPT. Tanto as fontes externas quanto as ferramentas de IA podem apresentar erros ou alterações. Portanto, as informações e resultados devem ser verificados de forma independente e não devem ser utilizados, isoladamente, como base para decisões de investimento.
 
 ---
+## Inspiração metodológica
+
+O projeto foi desenvolvido como uma ferramenta de estudo e acompanhamento pessoal, inspirado em conceitos e abordagens de investimento em ações com foco em geração de renda, dividendos, preço-teto e margem de segurança.
+
+Entre as referências conceituais que influenciaram o desenvolvimento estão abordagens popularizadas por Luiz Barsi Filho, Décio Bazin, Bruno Oliveira (VDA) e pela filosofia de investimento difundida pela Ações Garantem o Futuro (AGF).
+
+A aplicação, entretanto, não pretende reproduzir integralmente nenhuma dessas metodologias, nem possui vínculo, associação ou endosso por parte dos respectivos autores, empresas ou projetos. Os cálculos apresentados são aqueles implementados especificamente neste projeto e podem diferir das metodologias, critérios e premissas utilizados por essas referências.
+
+O objetivo é disponibilizar (para uso do próprio desenvolvedor) uma ferramenta simples para estudo e acompanhamento de indicadores relacionados a dividendos e preço de aquisição, utilizando dados obtidos de fontes externas e cálculos próprios.
+
+---
 
 ## 1. Estrutura do projeto
 
