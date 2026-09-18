@@ -114,7 +114,7 @@ Entre na pasta do projeto:
 
 No Windows, por exemplo:
 
-    cd "C:\caminho\para\preco-teto-acoes-local"
+    cd "C:\caminhopara\preco-teto-acoes-local"
 
 ---
 
@@ -238,7 +238,7 @@ Depois que o projeto já estiver configurado, o processo normal será:
 
 ### Windows
 
-    cd "C:\caminho\para\preco-teto-acoes-local"
+    cd "C:\para\preco-teto-acoes-local"
     .venv\Scripts\Activate.ps1
     python app.py
 
