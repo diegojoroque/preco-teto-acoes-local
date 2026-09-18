@@ -10,6 +10,8 @@ A aplicação é executada localmente e disponibiliza uma interface web simples 
 
     preco-teto-acoes-local/
     ├── app.py
+    ├── LICENSE
+    ├── README.md
     ├── static/
     │   └── style.css
     └── templates/
