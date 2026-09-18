@@ -6,23 +6,29 @@ A aplicação é executada localmente e disponibiliza uma interface web simples 
 
 ---
 
-## Aviso importante — Dados, finalidade e responsabilidade
+## Aviso importante — Dados, responsabilidade e uso de IA
 
 Esta aplicação foi desenvolvida para **uso próprio do desenvolvedor**, com finalidade de estudo, análise e acompanhamento pessoal de informações relacionadas ao mercado de ações.
 
-Os dados apresentados pela aplicação são obtidos a partir de **fontes e serviços de terceiros**, incluindo, mas não se limitando ao `yfinance` e a outras fontes públicas ou serviços utilizados para obtenção de informações financeiras. A disponibilidade, precisão, atualização, integridade e estrutura desses dados dependem dos respectivos provedores e podem sofrer alterações sem aviso prévio.
+Os dados apresentados são obtidos de **fontes e serviços de terceiros**, incluindo o `yfinance` e outras fontes públicas utilizadas pela aplicação. A disponibilidade, precisão, atualização e estrutura desses dados dependem dos respectivos provedores e podem sofrer alterações sem aviso prévio.
 
-Os indicadores e resultados apresentados pela aplicação, incluindo cotação, EPS, payout, PPA, preço-teto e dividend yield (DY), são calculados a partir dos dados obtidos das fontes consultadas e das fórmulas implementadas no código. Portanto, os resultados podem apresentar divergências em relação a outras fontes, metodologias ou cálculos.
+Os indicadores apresentados, como cotação, EPS, payout, PPA, preço-teto e dividend yield (DY), são calculados a partir dos dados obtidos e das fórmulas implementadas no código. Por isso, podem existir divergências em relação a outras fontes ou metodologias.
 
-A aplicação **não constitui recomendação de investimento, aconselhamento financeiro, indicação de compra ou venda de ativos, nem garantia de rentabilidade**. As informações apresentadas devem ser utilizadas exclusivamente como material auxiliar para análise.
+A aplicação **não constitui recomendação de investimento, aconselhamento financeiro, indicação de compra ou venda de ativos ou garantia de rentabilidade**. As informações apresentadas possuem caráter meramente informativo e auxiliar.
 
-O desenvolvedor **não se responsabiliza por erros, inconsistências, divergências, atrasos, indisponibilidade ou alterações nos dados fornecidos por terceiros**, tampouco por quaisquer decisões ou prejuízos decorrentes da utilização das informações ou dos cálculos apresentados pela aplicação.
+O desenvolvedor **não se responsabiliza por erros, inconsistências, divergências, atrasos ou indisponibilidade dos dados fornecidos por terceiros**, nem por decisões ou prejuízos decorrentes da utilização das informações ou dos resultados apresentados.
 
-A aplicação não foi desenvolvida com a finalidade de prestar serviços financeiros ou fornecer informações de investimento ao público. Seu desenvolvimento e utilização destinam-se ao **uso pessoal do próprio desenvolvedor**.
+### Desenvolvimento com auxílio de Inteligência Artificial
 
-Qualquer pessoa que utilize, copie, modifique ou faça uso das informações ou do código deste projeto deverá realizar sua própria verificação dos dados e assumir integralmente a responsabilidade por suas decisões e pela utilização da aplicação.
+O desenvolvimento desta aplicação contou com **forte auxílio de Inteligência Artificial, especialmente do ChatGPT**, principalmente na elaboração, revisão, correção e aprimoramento do código-fonte e da documentação.
 
-> **Em resumo:** os dados são provenientes de fontes de terceiros, a aplicação foi desenvolvida para uso próprio do desenvolvedor e os resultados apresentados possuem caráter meramente informativo e auxiliar, não havendo garantia quanto à sua precisão, completude ou atualização.
+É importante destacar que **Inteligências Artificiais podem cometer erros, gerar informações incorretas ou desatualizadas e apresentar "alucinações"**, produzindo respostas que aparentam ser corretas, mas que podem não corresponder aos fatos ou ao funcionamento real de determinado sistema.
+
+Por esse motivo, códigos, informações, cálculos e sugestões produzidos com auxílio de IA devem ser **revisados, testados e validados**, especialmente quando relacionados a informações financeiras.
+
+A utilização de Inteligência Artificial no desenvolvimento deste projeto não transfere para a ferramenta qualquer responsabilidade pelo funcionamento da aplicação ou pelos resultados obtidos.
+
+> **Em resumo:** os dados são provenientes de fontes de terceiros, a aplicação foi desenvolvida para uso próprio e contou com forte auxílio do ChatGPT. Tanto as fontes externas quanto as ferramentas de IA podem apresentar erros ou alterações. Portanto, as informações e resultados devem ser verificados de forma independente e não devem ser utilizados, isoladamente, como base para decisões de investimento.
 
 ---
 
