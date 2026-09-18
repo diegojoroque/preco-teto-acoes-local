@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Preço Teto</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- =====================================================
+     CABEÇALHO
+     ===================================================== -->
+
+<div class="cabecalho">
+
+    <h1 id="titulo">
+        Preço Teto
+    </h1>
+
+</div>
+
+<!-- =====================================================
+     BOTÕES
+     ===================================================== -->
+
+<div class="botoes">
+
+    <button
+        id="botaoAtualizar"
+        onclick="atualizarDados()"
+    >
+        Atualizar
+    </button>
+
+    <button
+        onclick="ordemPadrao()"
+    >
+        AZ ↑
+    </button>
+
+    <button
+        onclick="ordenarDY(false)"
+    >
+        DY ↑
+    </button>
+
+    <button
+        onclick="ordenarDY(true)"
+    >
+        DY ↓
+    </button>
+
+</div>
+
+    <!-- =====================================================
+         TABELA
+         ===================================================== -->
+
+    <div class="tabela-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Ticker</th>
+
+                    <th>Price(R$)</th>
+
+                    <th>MB(R$)</th>
+
+                    <th>DY(%)</th>
+
+                    <th>DPA(R$)</th>
+
+                    <th>EPS(R$)</th>
+
+                    <th>PO(%)</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="tabelaBody">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+<!-- =====================================================
+     LEGENDA — CORES DO DY
+     ===================================================== -->
+
+<div class="legenda">
+
+    <div class="legenda-titulo">
+        LEGENDA
+    </div>
+
+    <div class="legenda-itens">
+
+        <div class="legenda-item">
+            <span class="cor vermelho"></span>
+            <span>&lt; 6%</span>
+        </div>
+
+        <div class="legenda-item">
+            <span class="cor amarelo"></span>
+            <span>6% a &lt; 7%</span>
+        </div>
+
+        <div class="legenda-item">
+            <span class="cor verde-claro"></span>
+            <span>7% a &lt; 8%</span>
+        </div>
+
+        <div class="legenda-item">
+            <span class="cor verde-medio"></span>
+            <span>8% a &lt; 9%</span>
+        </div>
+
+        <div class="legenda-item">
+            <span class="cor verde-escuro"></span>
+            <span>≥ 9%</span>
+        </div>
+
+    </div>
+
+</div>
+
+
+    <!-- =====================================================
+         RODAPÉ / STATUS
+         ===================================================== -->
+
+    <div
+        id="status"
+        class="status"
+    >
+    </div>
+
+
+</div>
+
+
+<script>
+
+
+// ============================================================
+// DADOS
+// ============================================================
+
+let resultados = [];
+
+let ordemOriginal = [];
+
+
+// ============================================================
+// FORMATAÇÃO DE NÚMEROS
+// ============================================================
+
+function formatarNumero(
+    valor,
+    casas
+) {
+
+
+    if (
+        valor === null ||
+        valor === undefined
+    ) {
+
+        return "";
+
+    }
+
+
+    return Number(valor).toLocaleString(
+
+        "pt-BR",
+
+        {
+
+            minimumFractionDigits:
+                casas,
+
+            maximumFractionDigits:
+                casas
+
+        }
+
+    );
+
+}
+
+
+// ============================================================
+// MOSTRAR RESULTADOS
+// ============================================================
+
+function mostrarResultados() {
+
+
+    const tbody =
+        document.getElementById(
+            "tabelaBody"
+        );
+
+
+    tbody.innerHTML = "";
+
+
+    resultados.forEach(
+
+        resultado => {
+
+
+            const tr =
+                document.createElement(
+                    "tr"
+                );
+
+
+            // ------------------------------------------------
+            // COR DA LINHA PELO DY
+            // ------------------------------------------------
+
+            if (
+
+                resultado.dy === null ||
+
+                resultado.dy === undefined
+
+            ) {
+
+                // DY indisponível
+                tr.className =
+                    "neutro";
+
+            }
+
+
+            else if (
+
+                resultado.dy >= 9
+
+            ) {
+
+                // DY >= 9%
+                // VERDE ESCURO
+
+                tr.className =
+                    "verde-escuro";
+
+            }
+
+
+            else if (
+
+                resultado.dy >= 8
+
+            ) {
+
+                // DY >= 8% e < 9%
+                // VERDE MÉDIO
+
+                tr.className =
+                    "verde-medio";
+
+            }
+
+
+            else if (
+
+                resultado.dy >= 7
+
+            ) {
+
+                // DY >= 7% e < 8%
+                // VERDE CLARO
+
+                tr.className =
+                    "verde-claro";
+
+            }
+
+
+            else if (
+
+                resultado.dy >= 6
+
+            ) {
+
+                // DY >= 6% e < 7%
+                // AMARELO
+
+                tr.className =
+                    "amarelo";
+
+            }
+
+
+            else {
+
+                // DY < 6%
+                // VERMELHO
+
+                tr.className =
+                    "vermelho";
+
+            }
+
+
+            // ------------------------------------------------
+            // CÉLULAS
+            // ------------------------------------------------
+
+            tr.innerHTML = `
+
+                <td>
+                    ${resultado.ticker}
+                </td>
+
+                <td>
+                    ${formatarNumero(
+                        resultado.cotacao,
+                        2
+                    )}
+                </td>
+
+                <td>
+                    ${formatarNumero(
+                        resultado.precoTeto,
+                        2
+                    )}
+                </td>
+
+                <td>
+                    ${formatarNumero(
+                        resultado.dy,
+                        1
+                    )}
+                </td>
+
+                <td>
+                    ${formatarNumero(
+                        resultado.ppa,
+                        2
+                    )}
+                </td>
+
+                <td>
+                    ${formatarNumero(
+                        resultado.eps,
+                        2
+                    )}
+                </td>
+
+                <td>
+                    ${formatarNumero(
+                        resultado.payout,
+                        0
+                    )}
+                </td>
+
+            `;
+
+
+            tbody.appendChild(tr);
+
+
+        }
+
+    );
+
+}
+
+
+// ============================================================
+// ATUALIZA TEXTO DO RODAPÉ
+// ============================================================
+
+function atualizarStatus(
+    dataHora
+) {
+
+
+    const status =
+        document.getElementById(
+            "status"
+        );
+
+
+    if (dataHora) {
+
+
+        status.textContent =
+            "Dados atualizados em "
+            + dataHora
+            + ".";
+
+
+    }
+
+    else {
+
+
+        status.textContent =
+            "Dados ainda não atualizados.";
+
+
+    }
+
+}
+
+
+// ============================================================
+// CARREGAR DADOS
+// ============================================================
+
+async function carregarDados() {
+
+
+    try {
+
+
+        const resposta =
+            await fetch(
+                "/api/dados"
+            );
+
+
+        const dados =
+            await resposta.json();
+
+
+        resultados =
+            dados.resultados;
+
+
+        ordemOriginal =
+            JSON.parse(
+                JSON.stringify(
+                    resultados
+                )
+            );
+
+
+        mostrarResultados();
+
+
+        atualizarStatus(
+            dados.ultima_atualizacao
+        );
+
+
+    }
+
+
+    catch (erro) {
+
+
+        console.error(
+            erro
+        );
+
+
+        document.getElementById(
+            "status"
+        ).textContent =
+            "Erro ao carregar os dados.";
+
+
+    }
+
+}
+
+
+// ============================================================
+// ORDEM PADRÃO
+// ============================================================
+
+function ordemPadrao() {
+
+
+    resultados =
+        JSON.parse(
+            JSON.stringify(
+                ordemOriginal
+            )
+        );
+
+
+    mostrarResultados();
+
+
+}
+
+
+// ============================================================
+// ORDENAR DY
+// ============================================================
+
+function ordenarDY(
+    reverso
+) {
+
+
+    resultados.sort(
+
+        (
+            a,
+            b
+        ) => {
+
+
+            const dyA =
+                a.dy !== null
+                    ? a.dy
+                    : (
+                        reverso
+                            ? -Infinity
+                            : Infinity
+                    );
+
+
+            const dyB =
+                b.dy !== null
+                    ? b.dy
+                    : (
+                        reverso
+                            ? -Infinity
+                            : Infinity
+                    );
+
+
+            return reverso
+
+                ? dyB - dyA
+
+                : dyA - dyB;
+
+
+        }
+
+    );
+
+
+    mostrarResultados();
+
+
+}
+
+
+// ============================================================
+// ATUALIZAR DADOS
+// ============================================================
+
+async function atualizarDados() {
+
+
+    const botao =
+        document.getElementById(
+            "botaoAtualizar"
+        );
+
+
+    const titulo =
+        document.getElementById(
+            "titulo"
+        );
+
+
+    const status =
+        document.getElementById(
+            "status"
+        );
+
+
+    // --------------------------------------------------------
+    // BLOQUEIA BOTÃO
+    // --------------------------------------------------------
+
+    botao.disabled = true;
+
+
+    titulo.textContent =
+        "Atualizando...";
+
+
+    status.textContent =
+        "Consultando dados...";
+
+
+    try {
+
+
+        // ----------------------------------------------------
+        // SOLICITA ATUALIZAÇÃO
+        // ----------------------------------------------------
+
+        await fetch(
+
+            "/api/atualizar",
+
+            {
+
+                method: "POST"
+
+            }
+
+        );
+
+
+        // ----------------------------------------------------
+        // AGUARDA TÉRMINO
+        // ----------------------------------------------------
+
+        await aguardarAtualizacao();
+
+
+        // ----------------------------------------------------
+        // BUSCA DADOS ATUALIZADOS
+        // ----------------------------------------------------
+
+        const resposta =
+            await fetch(
+                "/api/dados"
+            );
+
+
+        const dados =
+            await resposta.json();
+
+
+        resultados =
+            dados.resultados;
+
+
+        ordemOriginal =
+            JSON.parse(
+                JSON.stringify(
+                    resultados
+                )
+            );
+
+
+        mostrarResultados();
+
+
+        atualizarStatus(
+            dados.ultima_atualizacao
+        );
+
+
+    }
+
+
+    catch (erro) {
+
+
+        console.error(
+            erro
+        );
+
+
+        status.textContent =
+            "Erro ao atualizar os dados.";
+
+
+    }
+
+
+    finally {
+
+
+        titulo.textContent =
+            "Preço Teto";
+
+
+        botao.disabled =
+            false;
+
+
+    }
+
+}
+
+
+// ============================================================
+// AGUARDAR ATUALIZAÇÃO
+// ============================================================
+
+async function aguardarAtualizacao() {
+
+
+    while (true) {
+
+
+        await new Promise(
+
+            resolve =>
+                setTimeout(
+                    resolve,
+                    500
+                )
+
+        );
+
+
+        const resposta =
+            await fetch(
+                "/api/dados"
+            );
+
+
+        const dados =
+            await resposta.json();
+
+
+        if (
+            !dados.atualizando
+        ) {
+
+
+            return;
+
+
+        }
+
+    }
+
+}
+
+
+// ============================================================
+// INICIALIZAÇÃO
+// ============================================================
+
+carregarDados();
+
+
+</script>
+
+
+</body>
+
+</html>
