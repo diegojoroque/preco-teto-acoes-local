@@ -6,6 +6,26 @@ A aplicação é executada localmente e disponibiliza uma interface web simples 
 
 ---
 
+## Aviso importante — Dados, finalidade e responsabilidade
+
+Esta aplicação foi desenvolvida para **uso próprio do desenvolvedor**, com finalidade de estudo, análise e acompanhamento pessoal de informações relacionadas ao mercado de ações.
+
+Os dados apresentados pela aplicação são obtidos a partir de **fontes e serviços de terceiros**, incluindo, mas não se limitando ao `yfinance` e a outras fontes públicas ou serviços utilizados para obtenção de informações financeiras. A disponibilidade, precisão, atualização, integridade e estrutura desses dados dependem dos respectivos provedores e podem sofrer alterações sem aviso prévio.
+
+Os indicadores e resultados apresentados pela aplicação, incluindo cotação, EPS, payout, PPA, preço-teto e dividend yield (DY), são calculados a partir dos dados obtidos das fontes consultadas e das fórmulas implementadas no código. Portanto, os resultados podem apresentar divergências em relação a outras fontes, metodologias ou cálculos.
+
+A aplicação **não constitui recomendação de investimento, aconselhamento financeiro, indicação de compra ou venda de ativos, nem garantia de rentabilidade**. As informações apresentadas devem ser utilizadas exclusivamente como material auxiliar para análise.
+
+O desenvolvedor **não se responsabiliza por erros, inconsistências, divergências, atrasos, indisponibilidade ou alterações nos dados fornecidos por terceiros**, tampouco por quaisquer decisões ou prejuízos decorrentes da utilização das informações ou dos cálculos apresentados pela aplicação.
+
+A aplicação não foi desenvolvida com a finalidade de prestar serviços financeiros ou fornecer informações de investimento ao público. Seu desenvolvimento e utilização destinam-se ao **uso pessoal do próprio desenvolvedor**.
+
+Qualquer pessoa que utilize, copie, modifique ou faça uso das informações ou do código deste projeto deverá realizar sua própria verificação dos dados e assumir integralmente a responsabilidade por suas decisões e pela utilização da aplicação.
+
+> **Em resumo:** os dados são provenientes de fontes de terceiros, a aplicação foi desenvolvida para uso próprio do desenvolvedor e os resultados apresentados possuem caráter meramente informativo e auxiliar, não havendo garantia quanto à sua precisão, completude ou atualização.
+
+---
+
 ## 1. Estrutura do projeto
 
     preco-teto-acoes-local/
