@@ -148,7 +148,6 @@
 
 </div>
 
-
     <!-- =====================================================
          RODAPÉ / STATUS
          ===================================================== -->
@@ -159,12 +158,9 @@
     >
     </div>
 
-
 </div>
 
-
 <script>
-
 
 // ============================================================
 // DADOS
@@ -173,7 +169,6 @@
 let resultados = [];
 
 let ordemOriginal = [];
-
 
 // ============================================================
 // FORMATAÇÃO DE NÚMEROS
@@ -184,7 +179,6 @@ function formatarNumero(
     casas
 ) {
 
-
     if (
         valor === null ||
         valor === undefined
@@ -193,7 +187,6 @@ function formatarNumero(
         return "";
 
     }
-
 
     return Number(valor).toLocaleString(
 
@@ -213,33 +206,27 @@ function formatarNumero(
 
 }
 
-
 // ============================================================
 // MOSTRAR RESULTADOS
 // ============================================================
 
 function mostrarResultados() {
 
-
     const tbody =
         document.getElementById(
             "tabelaBody"
         );
 
-
     tbody.innerHTML = "";
-
 
     resultados.forEach(
 
         resultado => {
 
-
             const tr =
                 document.createElement(
                     "tr"
                 );
-
 
             // ------------------------------------------------
             // COR DA LINHA PELO DY
@@ -259,7 +246,6 @@ function mostrarResultados() {
 
             }
 
-
             else if (
 
                 resultado.dy >= 9
@@ -273,7 +259,6 @@ function mostrarResultados() {
                     "verde-escuro";
 
             }
-
 
             else if (
 
@@ -289,7 +274,6 @@ function mostrarResultados() {
 
             }
 
-
             else if (
 
                 resultado.dy >= 7
@@ -303,7 +287,6 @@ function mostrarResultados() {
                     "verde-claro";
 
             }
-
 
             else if (
 
@@ -319,7 +302,6 @@ function mostrarResultados() {
 
             }
 
-
             else {
 
                 // DY < 6%
@@ -329,7 +311,6 @@ function mostrarResultados() {
                     "vermelho";
 
             }
-
 
             // ------------------------------------------------
             // CÉLULAS
@@ -385,16 +366,13 @@ function mostrarResultados() {
 
             `;
 
-
             tbody.appendChild(tr);
-
 
         }
 
     );
 
 }
-
 
 // ============================================================
 // ATUALIZA TEXTO DO RODAPÉ
@@ -404,35 +382,28 @@ function atualizarStatus(
     dataHora
 ) {
 
-
     const status =
         document.getElementById(
             "status"
         );
 
-
     if (dataHora) {
-
 
         status.textContent =
             "Dados atualizados em "
             + dataHora
             + ".";
 
-
     }
 
     else {
 
-
         status.textContent =
             "Dados ainda não atualizados.";
-
 
     }
 
 }
-
 
 // ============================================================
 // CARREGAR DADOS
@@ -440,23 +411,18 @@ function atualizarStatus(
 
 async function carregarDados() {
 
-
     try {
-
 
         const resposta =
             await fetch(
                 "/api/dados"
             );
 
-
         const dados =
             await resposta.json();
 
-
         resultados =
             dados.resultados;
-
 
         ordemOriginal =
             JSON.parse(
@@ -465,43 +431,34 @@ async function carregarDados() {
                 )
             );
 
-
         mostrarResultados();
-
 
         atualizarStatus(
             dados.ultima_atualizacao
         );
 
-
     }
 
-
     catch (erro) {
-
 
         console.error(
             erro
         );
-
 
         document.getElementById(
             "status"
         ).textContent =
             "Erro ao carregar os dados.";
 
-
     }
 
 }
-
 
 // ============================================================
 // ORDEM PADRÃO
 // ============================================================
 
 function ordemPadrao() {
-
 
     resultados =
         JSON.parse(
@@ -510,12 +467,9 @@ function ordemPadrao() {
             )
         );
 
-
     mostrarResultados();
 
-
 }
-
 
 // ============================================================
 // ORDENAR DY
@@ -525,14 +479,12 @@ function ordenarDY(
     reverso
 ) {
 
-
     resultados.sort(
 
         (
             a,
             b
         ) => {
-
 
             const dyA =
                 a.dy !== null
@@ -543,7 +495,6 @@ function ordenarDY(
                             : Infinity
                     );
 
-
             const dyB =
                 b.dy !== null
                     ? b.dy
@@ -553,24 +504,19 @@ function ordenarDY(
                             : Infinity
                     );
 
-
             return reverso
 
                 ? dyB - dyA
 
                 : dyA - dyB;
 
-
         }
 
     );
 
-
     mostrarResultados();
 
-
 }
-
 
 // ============================================================
 // ATUALIZAR DADOS
@@ -578,24 +524,20 @@ function ordenarDY(
 
 async function atualizarDados() {
 
-
     const botao =
         document.getElementById(
             "botaoAtualizar"
         );
-
 
     const titulo =
         document.getElementById(
             "titulo"
         );
 
-
     const status =
         document.getElementById(
             "status"
         );
-
 
     // --------------------------------------------------------
     // BLOQUEIA BOTÃO
@@ -603,17 +545,13 @@ async function atualizarDados() {
 
     botao.disabled = true;
 
-
     titulo.textContent =
         "Atualizando...";
-
 
     status.textContent =
         "Consultando dados...";
 
-
     try {
-
 
         // ----------------------------------------------------
         // SOLICITA ATUALIZAÇÃO
@@ -631,13 +569,11 @@ async function atualizarDados() {
 
         );
 
-
         // ----------------------------------------------------
         // AGUARDA TÉRMINO
         // ----------------------------------------------------
 
         await aguardarAtualizacao();
-
 
         // ----------------------------------------------------
         // BUSCA DADOS ATUALIZADOS
@@ -648,14 +584,11 @@ async function atualizarDados() {
                 "/api/dados"
             );
 
-
         const dados =
             await resposta.json();
 
-
         resultados =
             dados.resultados;
-
 
         ordemOriginal =
             JSON.parse(
@@ -664,48 +597,36 @@ async function atualizarDados() {
                 )
             );
 
-
         mostrarResultados();
-
 
         atualizarStatus(
             dados.ultima_atualizacao
         );
 
-
     }
 
-
     catch (erro) {
-
 
         console.error(
             erro
         );
 
-
         status.textContent =
             "Erro ao atualizar os dados.";
 
-
     }
 
-
     finally {
-
 
         titulo.textContent =
             "Preço Teto";
 
-
         botao.disabled =
             false;
-
 
     }
 
 }
-
 
 // ============================================================
 // AGUARDAR ATUALIZAÇÃO
@@ -713,9 +634,7 @@ async function atualizarDados() {
 
 async function aguardarAtualizacao() {
 
-
     while (true) {
-
 
         await new Promise(
 
@@ -727,24 +646,19 @@ async function aguardarAtualizacao() {
 
         );
 
-
         const resposta =
             await fetch(
                 "/api/dados"
             );
 
-
         const dados =
             await resposta.json();
-
 
         if (
             !dados.atualizando
         ) {
 
-
             return;
-
 
         }
 
@@ -752,16 +666,13 @@ async function aguardarAtualizacao() {
 
 }
 
-
 // ============================================================
 // INICIALIZAÇÃO
 // ============================================================
 
 carregarDados();
 
-
 </script>
-
 
 </body>
 
