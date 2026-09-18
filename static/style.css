@@ -1,0 +1,433 @@
+/* ============================================================
+   GERAL
+   ============================================================ */
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+
+    margin: 0;
+
+    padding: 0;
+
+    background: #f4f4f4;
+
+    font-family: Arial, sans-serif;
+
+    color: #000;
+
+}
+
+
+/* ============================================================
+   CONTAINER
+   ============================================================ */
+
+.container {
+    display: block;
+    width: fit-content;
+    margin: 10px auto;
+    background: white;
+    padding: 8px 10px 10px 10px;
+    border: 1px solid #d0d0d0;
+    border-radius: 4px;
+}
+
+
+/* ============================================================
+   CABEÇALHO
+   ============================================================ */
+
+.cabecalho {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 42px;
+
+}
+
+
+h1 {
+
+    margin: 0;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+}
+
+
+/* ============================================================
+   BOTÃO ATUALIZAR
+   ============================================================ */
+
+#botaoAtualizar {
+
+    position: absolute;
+
+    right: 0;
+
+    top: 0;
+
+    width: 90px;
+
+    height: 30px;
+
+}
+
+
+/* ============================================================
+   BOTÕES
+   ============================================================ */
+
+.botoes {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 5px;
+
+    margin: 5px 0 8px 0;
+
+}
+
+
+.botoes button {
+
+    width: 75px;
+
+    height: 28px;
+
+    cursor: pointer;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 13px;
+
+}
+
+
+/* ============================================================
+   BOTÃO ATUALIZAR
+   ============================================================ */
+
+#botaoAtualizar {
+
+    position: static;
+
+    width: 75px;
+
+    height: 28px;
+
+}
+
+
+
+/* ============================================================
+   TABELA
+   ============================================================ */
+
+.tabela-container {
+
+    overflow: hidden;
+
+}
+
+
+table {
+
+    border-collapse: collapse;
+
+    table-layout: fixed;
+
+}
+
+
+th,
+td {
+
+    border: 1px solid #bfbfbf;
+
+    text-align: center;
+
+    white-space: nowrap;
+
+    height: 28px;
+
+    padding: 0 5px;
+
+    font-size: 13px;
+
+}
+
+
+/* ============================================================
+   LARGURAS DAS COLUNAS
+   ============================================================ */
+
+th:nth-child(1),
+td:nth-child(1) {
+    width: 55px;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+    width: 60px;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+    width: 60px;
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+    width: 50px;
+}
+
+th:nth-child(5),
+td:nth-child(5) {
+    width: 60px;
+}
+
+th:nth-child(6),
+td:nth-child(6) {
+    width: 55px;
+}
+
+th:nth-child(7),
+td:nth-child(7) {
+    width: 50px;
+
+}
+
+
+/* ============================================================
+   CABEÇALHO DA TABELA
+   ============================================================ */
+
+th {
+
+    background: #eeeeee;
+
+    font-weight: bold;
+
+}
+
+
+/* ============================================================
+   CORES DO DY
+   ============================================================ */
+
+
+/*
+   DY < 6%
+   VERMELHO
+*/
+
+.vermelho {
+
+    background: #F4CCCC;
+
+    color: #000000;
+
+}
+
+
+/*
+   DY >= 6% e < 7%
+   AMARELO
+*/
+
+.amarelo {
+
+    background: #FFEB9C;
+
+    color: #000000;
+
+}
+
+
+/*
+   DY >= 7% e < 8%
+   VERDE CLARO
+*/
+
+.verde-claro {
+
+    background: #C6EFCE;
+
+    color: #000000;
+
+}
+
+
+/*
+   DY >= 8% e < 9%
+   VERDE MÉDIO
+*/
+
+.verde-medio {
+
+    background: #93C47D;
+
+    color: #000000;
+
+}
+
+
+/*
+   DY >= 9%
+   VERDE ESCURO
+*/
+
+.verde-escuro {
+
+    background: #6AA84F;
+
+    color: #000000;
+
+}
+
+
+/*
+   DY indisponível
+   NEUTRO
+*/
+
+.neutro {
+
+    background: white;
+
+    color: #000000;
+
+}
+
+
+/* ============================================================
+   RODAPÉ / STATUS
+   ============================================================ */
+
+.status {
+
+    height: 18px;
+
+    margin-top: 5px;
+
+    text-align: center;
+
+    font-size: 11px;
+
+    color: #666;
+
+}
+
+/* ============================================================
+   LEGENDA — CORES DO DY
+   ============================================================ */
+
+.legenda {
+
+    margin-top: 8px;
+
+    text-align: center;
+
+}
+
+
+.legenda-titulo {
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    margin-bottom: 4px;
+
+}
+
+
+.legenda-itens {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 10px;
+
+}
+
+
+.legenda-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 3px;
+
+    font-size: 10px;
+
+}
+
+
+.cor {
+
+    display: inline-block;
+
+    width: 12px;
+
+    height: 12px;
+
+    border: 1px solid #999;
+
+}
+
+
+/* Cores da legenda */
+
+.cor.vermelho {
+
+    background: #F4CCCC;
+
+}
+
+
+.cor.amarelo {
+
+    background: #FFEB9C;
+
+}
+
+
+.cor.verde-claro {
+
+    background: #C6EFCE;
+
+}
+
+
+.cor.verde-medio {
+
+    background: #93C47D;
+
+}
+
+
+.cor.verde-escuro {
+
+    background: #6AA84F;
+
+}
