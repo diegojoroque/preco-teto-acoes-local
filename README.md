@@ -1,4 +1,4 @@
-# Preço Teto Ações Local
+# Preço Teto Ações (Local)
 
 Aplicação web local desenvolvida em Python + Flask + JavaScript + CSS para consultar cotações de ações da B3, obter estimativas de EPS por meio do yfinance e calcular indicadores como PPA, preço-teto e dividend yield (DY).
 
