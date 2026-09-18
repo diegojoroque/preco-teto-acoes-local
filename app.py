@@ -5,7 +5,6 @@ import webbrowser
 import time
 from datetime import datetime
 
-
 # ============================================================
 # CONFIGURAÇÕES
 # ============================================================
@@ -26,7 +25,6 @@ tickerPrefix = {
     "TAEE": [100]
 }
 
-
 priceSuffix = {
     "AXIA": ["3"],
     "BBAS": ["3"],
@@ -42,7 +40,6 @@ priceSuffix = {
     "PSSA": ["3"],
     "TAEE": ["3", "4"]
 }
-
 
 epsTicker = {
     "AXIA3": ("AXIA3", 1),
@@ -64,13 +61,11 @@ epsTicker = {
     "TAEE4": ("TAEE11", 3)
 }
 
-
 # ============================================================
 # FLASK
 # ============================================================
 
 app = Flask(__name__)
-
 
 # ============================================================
 # VARIÁVEIS
@@ -82,7 +77,6 @@ atualizando = False
 
 ultima_atualizacao = None
 
-
 # ============================================================
 # CONSULTA DOS DADOS
 # ============================================================
@@ -91,18 +85,15 @@ def consultar_dados():
 
     novosResultados = []
 
-
     for prefix, payouts in tickerPrefix.items():
 
         for suffix in priceSuffix[prefix]:
 
             ticker = prefix + suffix
 
-
             print(
                 f"Consultando {ticker}..."
             )
-
 
             # ------------------------------------------------
             # COTAÇÃO
@@ -127,7 +118,6 @@ def consultar_dados():
 
                 cotacao = None
 
-
             # ------------------------------------------------
             # EPS
             # ------------------------------------------------
@@ -138,11 +128,9 @@ def consultar_dados():
                     epsTicker[ticker]
                 )
 
-
                 acaoEps = yf.Ticker(
                     tickerEps + ".SA"
                 )
-
 
                 eps = (
                     acaoEps
@@ -150,9 +138,7 @@ def consultar_dados():
                     .loc["0y", "avg"]
                 )
 
-
                 eps = eps / divisorEps
-
 
             except (
                 KeyError,
@@ -164,7 +150,6 @@ def consultar_dados():
 
                 eps = None
 
-
             # ------------------------------------------------
             # PAYOUT MÉDIO
             # ------------------------------------------------
@@ -173,7 +158,6 @@ def consultar_dados():
                 sum(payouts)
                 / len(payouts)
             )
-
 
             # ------------------------------------------------
             # CÁLCULOS
@@ -186,11 +170,9 @@ def consultar_dados():
                     * (payout / 100)
                 )
 
-
                 precoTeto = (
                     ppa / 0.06
                 )
-
 
                 if (
                     cotacao is not None
@@ -215,7 +197,6 @@ def consultar_dados():
 
                 dy = None
 
-
             # ------------------------------------------------
             # RESULTADO
             # ------------------------------------------------
@@ -238,9 +219,7 @@ def consultar_dados():
 
             })
 
-
     return novosResultados
-
 
 # ============================================================
 # ATUALIZAÇÃO DOS DADOS
@@ -252,14 +231,11 @@ def atualizar_dados():
     global atualizando
     global ultima_atualizacao
 
-
     if atualizando:
 
         return
 
-
     atualizando = True
-
 
     try:
 
@@ -276,7 +252,6 @@ def atualizar_dados():
             consultar_dados()
         )
 
-
         # ----------------------------------------------------
         # DATA E HORA DA ATUALIZAÇÃO
         # ----------------------------------------------------
@@ -287,7 +262,6 @@ def atualizar_dados():
             )
         )
 
-
         print()
 
         print(
@@ -297,11 +271,9 @@ def atualizar_dados():
 
         print()
 
-
     finally:
 
         atualizando = False
-
 
 # ============================================================
 # ROTA PRINCIPAL
@@ -314,7 +286,6 @@ def index():
         "index.html",
         resultados=resultados
     )
-
 
 # ============================================================
 # API — DADOS
@@ -336,7 +307,6 @@ def api_dados():
 
     })
 
-
 # ============================================================
 # API — ATUALIZAR
 # ============================================================
@@ -349,7 +319,6 @@ def api_atualizar():
 
     global atualizando
 
-
     if atualizando:
 
         return jsonify({
@@ -359,17 +328,13 @@ def api_atualizar():
 
         })
 
-
     thread = threading.Thread(
         target=atualizar_dados
     )
 
-
     thread.daemon = True
 
-
     thread.start()
-
 
     return jsonify({
 
@@ -377,7 +342,6 @@ def api_atualizar():
             "iniciado"
 
     })
-
 
 # ============================================================
 # ABRIR NAVEGADOR
@@ -387,11 +351,9 @@ def abrir_navegador():
 
     time.sleep(1)
 
-
     webbrowser.open(
         "http://127.0.0.1:5000"
     )
-
 
 # ============================================================
 # PROGRAMA PRINCIPAL
@@ -415,7 +377,6 @@ if __name__ == "__main__":
 
     print()
 
-
     # --------------------------------------------------------
     # PRIMEIRA CONSULTA
     # --------------------------------------------------------
@@ -424,9 +385,7 @@ if __name__ == "__main__":
         "Consultando dados iniciais..."
     )
 
-
     atualizar_dados()
-
 
     # --------------------------------------------------------
     # ABRIR NAVEGADOR
@@ -436,7 +395,6 @@ if __name__ == "__main__":
         target=abrir_navegador,
         daemon=True
     ).start()
-
 
     # --------------------------------------------------------
     # INICIAR FLASK
